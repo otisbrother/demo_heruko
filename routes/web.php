@@ -28,7 +28,8 @@ use App\Http\Controllers\Auth\PatientAuthController;
 use App\Http\Controllers\InsuranceApplicationController;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return 'Hello railway';
 });
 
 // Route test để debug admin login
