@@ -1,287 +1,98 @@
-# 🏥 HỆ THỐNG QUẢN LÝ KHÁM CHỮA BỆNH VIỆN HERUKO
-
-## 📋 Tổng quan
-
-Hệ thống quản lý khám chữa bệnh là một ứng dụng web toàn diện được phát triển bằng **Laravel 12** để quản lý toàn bộ quy trình khám chữa bệnh tại bệnh viện. Hệ thống hỗ trợ 3 vai trò chính: **Admin**, **Bác sĩ** và **Bệnh nhân** với các chức năng quản lý đầy đủ và hiện đại.
-
-## 🎥 Demo Video
-
-[![Demo Video](https://img.shields.io/badge/🎥-Xem_Demo_Video-red?style=for-the-badge)](https://your-video-url.com)
-
-
-
-## 🎯 Tính năng chính
-
-### 👥 Quản lý Người dùng
-
-#### **Bệnh nhân**
-- ✅ Đăng ký tài khoản với ID tự động (BNxxxxx)
-- ✅ Phân loại bệnh nhân (nội trú/ngoại trú)
-- ✅ Quản lý thông tin cá nhân và liên hệ
-- ✅ Đăng nhập riêng với hệ thống xác thực
-- ✅ Quản lý thông tin người thân
-- ✅ Xem lịch sử khám bệnh và đơn thuốc
-
-#### **Bác sĩ**
-- ✅ Quản lý thông tin bác sĩ theo khoa chuyên môn
-- ✅ Hệ thống xác thực riêng biệt
-- ✅ Dashboard chuyên môn với các chức năng khám chữa bệnh
-- ✅ Quản lý lịch hẹn và kê đơn thuốc
-- ✅ Xem danh sách bệnh nhân được phân công
-
-#### **Admin**
-- ✅ Quản lý toàn bộ hệ thống
-- ✅ Dashboard tổng quan với thống kê
-- ✅ Phân quyền và quản lý người dùng
-- ✅ Xử lý đơn xin bảo hiểm y tế
-
-### 🏥 Quản lý Khám chữa bệnh
-
-#### **Lịch hẹn khám**
-- ✅ Đặt lịch hẹn khám với bác sĩ chuyên khoa
-- ✅ Phân công bác sĩ và khoa phù hợp
-- ✅ Hệ thống thông báo real-time
-- ✅ Theo dõi trạng thái lịch hẹn (pending, confirmed, completed)
-- ✅ Lịch sử lịch hẹn chi tiết
-
-#### **Sổ khám bệnh**
-- ✅ Tạo và quản lý sổ khám bệnh
-- ✅ Ghi chép triệu chứng và chẩn đoán
-- ✅ Lưu trữ lịch sử khám bệnh chi tiết
-- ✅ Theo dõi tiến trình điều trị
-
-#### **Đơn thuốc**
-- ✅ Kê đơn thuốc với chi tiết thuốc
-- ✅ Quản lý liều lượng và hướng dẫn sử dụng
-- ✅ Danh mục thuốc trong kho
-- ✅ Lịch sử đơn thuốc của bệnh nhân
-
-#### **Nhập/Xuất viện**
-- ✅ Quản lý quá trình nhập viện
-- ✅ Phân công phòng và giường bệnh
-- ✅ Quản lý xuất viện và hướng dẫn
-- ✅ Theo dõi thời gian nằm viện
-
-### 💰 Quản lý Tài chính
-
-#### **Hóa đơn viện phí**
-- ✅ Tạo hóa đơn tự động
-- ✅ Tính toán chi phí theo loại bệnh nhân
-- ✅ Quản lý thanh toán
-- ✅ Lịch sử hóa đơn
-
-#### **Bảo hiểm y tế**
-- ✅ Quản lý thông tin bảo hiểm
-- ✅ Xử lý đơn xin bảo hiểm
-- ✅ Tính toán mức chi trả
-- ✅ Theo dõi trạng thái đơn
-
-### 📊 Dashboard & Báo cáo
-
-#### **Admin Dashboard**
-- ✅ Thống kê tổng quan (bệnh nhân, bác sĩ, đơn thuốc)
-- ✅ Biểu đồ nhập/xuất viện theo tháng
-- ✅ Thông báo real-time cho lịch hẹn mới
-- ✅ Quản lý đơn xin bảo hiểm
-
-#### **Bác sĩ Dashboard**
-- ✅ Danh sách bệnh nhân được phân công
-- ✅ Lịch hẹn trong ngày
-- ✅ Quản lý đơn thuốc và sổ khám bệnh
-
-## 🛠️ Công nghệ sử dụng
-
-### **Backend**
-- **Framework:** Laravel 12
-- **PHP:** 8.2+
-- **Database:** MySQL
-- **ORM:** Eloquent
-- **Authentication:** Laravel Breeze
-
-### **Frontend**
-- **CSS Framework:** Tailwind CSS
-- **JavaScript:** Alpine.js
-- **Build Tool:** Vite
-- **Icons:** Phosphor Icons
-
-### **Development Tools**
-- **Testing:** PHPUnit
-- **Code Quality:** Laravel Pint
-- **Development Environment:** Laravel Sail
-- **Package Manager:** Composer, NPM
-
-## 📁 Cấu trúc dự án
-
-```
-manager_hospital/
-├── app/
-│   ├── Http/Controllers/     # 20+ Controllers
-│   ├── Models/              # 15+ Models
-│   ├── Services/            # Business Logic
-│   ├── Helpers/             # Helper Functions
-│   └── Providers/           # Service Providers
-├── database/
-│   ├── migrations/          # 30+ Migration files
-│   └── seeders/            # Database Seeders
-├── resources/
-│   ├── views/              # 50+ Blade templates
-│   └── css/               # Tailwind CSS
-├── routes/
-│   ├── web.php            # 100+ Routes
-│   └── auth.php           # Authentication routes
-└── tests/                 # Unit tests
-```
-
-## 🗄️ Database Schema
-
-### **Core Tables**
-- `patients` - Thông tin bệnh nhân
-- `doctors` - Thông tin bác sĩ
-- `departments` - Khoa chuyên môn
-- `appointments` - Lịch hẹn khám
-- `medical_records` - Sổ khám bệnh
-- `prescriptions` - Đơn thuốc
-- `medicines` - Danh mục thuốc
-- `bills` - Hóa đơn viện phí
-- `health_insurance` - Bảo hiểm y tế
-
-### **Relationship Tables**
-- `detail_medical_records` - Chi tiết sổ khám
-- `detail_prescriptions` - Chi tiết đơn thuốc
-- `hospitalized` - Thông tin nhập viện
-- `discharges` - Thông tin xuất viện
-- `relatives` - Người thân bệnh nhân
-
-## 🚀 Cài đặt và chạy dự án
-
-### **Yêu cầu hệ thống**
-- PHP 8.2+
-- Composer
-- Node.js & NPM
-- MySQL 8.0+
-
-### **Bước 1: Clone dự án**
-```bash
-git clone <repository-url>
-cd manager_hospital
-```
-
-### **Bước 2: Cài đặt dependencies**
-```bash
-composer install
-npm install
-```
-
-### **Bước 3: Cấu hình môi trường**
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-
-### **Bước 4: Cấu hình database**
-```bash
-# Chỉnh sửa .env file với thông tin database
-php artisan migrate
-php artisan db:seed
-```
-
-### **Bước 5: Chạy dự án**
-```bash
-# Terminal 1: Laravel server
-php artisan serve
-
-# Terminal 2: Vite development server
-npm run dev
-```
-
-## 👤 Tài khoản mặc định
-
-### **Admin**
-- Email: admin@hospital.com
-- Password: password
-
-### **Bác sĩ**
-- Email: doctor@hospital.com
-- Password: password
-
-### **Bệnh nhân**
-- ID: BN00001
-- Password: password
-
-## 🔐 Bảo mật
-
-- **Authentication:** Laravel Breeze với multi-role support
-- **Authorization:** Middleware phân quyền theo vai trò
-- **Data Validation:** Form validation và sanitization
-- **CSRF Protection:** Laravel CSRF tokens
-- **Password Hashing:** Bcrypt hashing
-
-## 📱 Responsive Design
-
-- **Mobile-first approach** với Tailwind CSS
-- **Progressive Web App** features
-- **Cross-browser compatibility**
-- **Accessibility** standards
-
-## 🧪 Testing
-
-```bash
-# Chạy tất cả tests
-php artisan test
-
-# Chạy tests với coverage
-php artisan test --coverage
-```
-
-## 📈 Performance
-
-- **Database Optimization:** Indexed queries, eager loading
-- **Caching:** Laravel cache system
-- **Asset Optimization:** Vite bundling
-- **Image Optimization:** Responsive images
-
-## 🔄 API Endpoints
-
-### **Authentication**
-- `POST /login` - Đăng nhập
-- `POST /logout` - Đăng xuất
-- `GET /profile` - Thông tin cá nhân
-
-### **Appointments**
-- `GET /appointments` - Danh sách lịch hẹn
-- `POST /appointments` - Tạo lịch hẹn mới
-- `PUT /appointments/{id}` - Cập nhật lịch hẹn
-
-### **Medical Records**
-- `GET /medical-records` - Danh sách sổ khám
-- `POST /medical-records` - Tạo sổ khám mới
-- `GET /medical-records/{id}` - Chi tiết sổ khám
-
-## 🤝 Contributing
-
-1. Fork dự án
-2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Tạo Pull Request
-
-## 📄 License
-
-Dự án này được phát hành dưới [MIT License](LICENSE).
-
-## 📞 Liên hệ
-
-- **Developer:** [Your Name]
-- **Email:** [your.email@example.com]
-- **GitHub:** [@yourusername]
-
-## 🙏 Acknowledgments
-
-- Laravel team cho framework tuyệt vời
-- Tailwind CSS cho styling system
-- Alpine.js cho interactive components
-- Cộng đồng open source
+# 🏥 HỆ THỐNG QUẢN LÝ BỆNH VIỆN
+
+## 📋 TỔNG QUAN HỆ THỐNG
+
+Hệ thống quản lý bệnh viện được xây dựng trên nền tảng Laravel với 3 vai trò chính: **Admin**, **Bác sĩ** và **Bệnh nhân**. Mỗi vai trò có các chức năng và quyền hạn riêng biệt.
+
+## 👥 CÁC VAI TRÒ VÀ QUYỀN HẠN
+
+### 🔧 ADMIN (Quản trị viên)
+**Quyền hạn:**
+- Quản lý toàn bộ hệ thống
+- Thống kê tổng quan
+- Duyệt hồ sơ BHYT
+- Quản lý bệnh nhân, bác sĩ, khoa
+- Quản lý thuốc, đơn thuốc
+- Quản lý nhập/xuất viện
+- Xử lý hóa đơn
+
+### 👨‍⚕️ BÁC SĨ
+**Quyền hạn:**
+- Khám bệnh và ghi hồ sơ y tế
+- Kê đơn thuốc
+- Quản lý lịch khám
+- Quản lý nhập/xuất viện
+- Xem thống kê cá nhân
+
+### 👤 BỆNH NHÂN
+**Quyền hạn:**
+- Đặt lịch hẹn khám
+- Xem hồ sơ y tế cá nhân
+- Xem đơn thuốc
+- Thanh toán hóa đơn
+- Đăng ký BHYT
+- Quản lý thông tin cá nhân
 
 ---
 
-**⭐ Nếu dự án này hữu ích, hãy cho một star nhé!**
+
+
+## 🔐 BẢO MẬT VÀ PHÂN QUYỀN
+
+### **Hệ Thống Xác Thực**
+- **Admin**: Sử dụng Laravel Breeze với role 'admin'
+- **Bác sĩ**: Sử dụng guard 'doctor' riêng biệt
+- **Bệnh nhân**: Sử dụng session-based authentication
+
+### **Phân Quyền Truy Cập**
+- Mỗi vai trò chỉ có thể truy cập các chức năng được phân quyền
+- Middleware kiểm tra quyền truy cập trước khi cho phép thực hiện chức năng
+- Session timeout cho bệnh nhân (10 phút)
+
+---
+
+## 📱 GIAO DIỆN NGƯỜI DÙNG
+
+### **Responsive Design**
+- Giao diện thân thiện với mobile
+- Sử dụng Tailwind CSS
+- Components tái sử dụng
+
+### **Thông Báo Real-time**
+- Thông báo lịch hẹn mới cho Admin
+- Thông báo duyệt BHYT cho bệnh nhân
+- Cập nhật trạng thái real-time
+
+---
+
+## 🛠️ CÔNG NGHỆ SỬ DỤNG
+
+- **Backend**: Laravel 10.x
+- **Frontend**: Blade Templates + Tailwind CSS
+- **Database**: MySQL
+- **Authentication**: Laravel Breeze + Custom Guards
+- **File Upload**: Laravel Storage
+- **Real-time**: AJAX + JavaScript
+
+---
+
+## 📈 TÍNH NĂNG NỔI BẬT
+
+1. **Quản lý đa vai trò** với phân quyền chi tiết
+2. **Hệ thống đặt lịch hẹn** thông minh
+3. **Quản lý BHYT** với workflow duyệt
+4. **Hệ thống thanh toán** tích hợp
+5. **Thống kê và báo cáo** chi tiết
+6. **Quản lý nhập/xuất viện** toàn diện
+7. **Giao diện responsive** thân thiện
+8. **Thông báo real-time** cho người dùng
+
+---
+
+## 🎯 MỤC TIÊU HỆ THỐNG
+
+- **Tối ưu hóa quy trình** khám chữa bệnh
+- **Giảm thiểu thời gian chờ** của bệnh nhân
+- **Tăng hiệu quả quản lý** cho bệnh viện
+- **Cải thiện trải nghiệm** người dùng
+- **Đảm bảo tính bảo mật** và an toàn dữ liệu

@@ -31,10 +31,51 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route test để debug admin login
+Route::get('/debug-admin', function() {
+    if (Auth::check()) {
+        return 'Đã đăng nhập: ' . Auth::user()->name . ' - Role: ' . Auth::user()->role;
+    } else {
+        return 'Chưa đăng nhập';
+    }
+})->name('debug.admin');
+
+// Route test để debug admin login redirect
+Route::get('/debug-admin-redirect', function() {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard.simple');
+        } else {
+            return 'Không phải admin - Role: ' . $user->role;
+        }
+    } else {
+        return 'Chưa đăng nhập';
+    }
+})->name('debug.admin.redirect');
+
+// Route test để debug session
+Route::get('/debug-session', function() {
+    $sessionData = [
+        'session_id' => session()->getId(),
+        'auth_check' => Auth::check(),
+        'user_id' => Auth::id(),
+        'user_name' => Auth::user()->name ?? 'N/A',
+        'user_role' => Auth::user()->role ?? 'N/A',
+        'session_data' => session()->all()
+    ];
+    return response()->json($sessionData);
+})->name('debug.session');
+
 // ✅ Route dashboard cho admin (để tránh xung đột)
 Route::get('/admin-dashboard', function () {
     return redirect()->route('admin.dashboard');
-})->middleware('auth')->name('admin.main.dashboard');
+})->middleware(['auth', 'role:admin'])->name('admin.main.dashboard');
+
+// Route test để debug redirect
+Route::get('/test-redirect', function() {
+    return 'Test redirect route - Current URL: ' . request()->url();
+})->name('test.redirect');
 
 // ✅ Các route liên quan đến hồ sơ cá nhân (breeze mặc định)
 Route::middleware('auth')->group(function () {
@@ -62,15 +103,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
             $user = Auth::user();
             if ($user->role === 'admin') {
                 $request->session()->regenerate();
-                return redirect()->intended(route('admin.dashboard'));
+                // Debug: Log thông tin user
+                \Log::info('Admin login successful - User: ' . $user->name . ' Role: ' . $user->role);
+                return redirect('/admin/dashboard-simple');
             } else {
                 Auth::logout();
+                \Log::warning('Admin login failed - User: ' . $user->name . ' Role: ' . $user->role);
                 return back()->withErrors([
                     'email' => 'Tài khoản này không có quyền admin.',
                 ]);
             }
         }
 
+        \Log::warning('Admin login failed - Invalid credentials');
         return back()->withErrors([
             'email' => 'Thông tin đăng nhập không chính xác.',
         ]);
@@ -81,6 +126,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
      Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+     
+     // Route test để debug
+     Route::get('/test', function() {
+         return 'Admin test route working! User: ' . Auth::user()->name . ' Role: ' . Auth::user()->role;
+     })->name('test');
+     
+     // Route dashboard đơn giản để test
+     Route::get('/dashboard-simple', function() {
+         return 'Admin dashboard simple - User: ' . Auth::user()->name . ' Role: ' . Auth::user()->role;
+     })->name('dashboard.simple');
 
     // ✅ Route logout cho admin
     Route::post('/logout', function (Request $request) {
@@ -736,6 +791,8 @@ Route::get('/test/insurance-images', function() {
     
     return response()->json($result);
 });
+
+
 
 
 
